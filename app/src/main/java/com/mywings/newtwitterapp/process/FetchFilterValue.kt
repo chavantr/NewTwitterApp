@@ -31,7 +31,7 @@ class FetchFilterValue : AsyncTask<String?, Void, ArrayList<String>?>() {
         onFilterDataListener.onFilter(result)
     }
 
-    private fun setOnFilterListener(onFilterDataListener: OnFilterDataListener, param: String) {
+     fun setOnFilterListener(onFilterDataListener: OnFilterDataListener, param: String) {
         this.onFilterDataListener = onFilterDataListener
         this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, param)
     }
