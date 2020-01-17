@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.mywings.newtwitterapp.process.FetchFilterValue
 import com.mywings.newtwitterapp.process.OnFilterDataListener
 import com.mywings.newtwitterapp.process.ProgressDialogUtil
+import kotlinx.android.synthetic.main.activity_filter.*
 
 class FilterActivity : AppCompatActivity(), OnFilterDataListener {
 
@@ -15,6 +16,14 @@ class FilterActivity : AppCompatActivity(), OnFilterDataListener {
         setContentView(R.layout.activity_filter)
         progressDialogUtil = ProgressDialogUtil(this)
         init()
+        btnRoom.setOnClickListener {  }
+        btnFood.setOnClickListener {  }
+        btnService.setOnClickListener {  }
+        btnPrice.setOnClickListener {  }
+        btnCleanliness.setOnClickListener {  }
+        btnLocation.setOnClickListener {  }
+        btnStaff.setOnClickListener {  }
+        btnBar.setOnClickListener {  }
     }
 
     private fun init() {

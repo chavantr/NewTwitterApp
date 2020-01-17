@@ -1,6 +1,14 @@
 <resources>
-    <string name="app_name">NewTwitterApp</string>
+    <string name="app_name">Travel Rec System</string>
     <string name="search_keyword">Search keyword</string>
     <string name="search_here">Search here</string>
     <string name="search">Search</string>
+    <string name="room">Room</string>
+    <string name="food">Food</string>
+    <string name="staff">Staff</string>
+    <string name="bar">Bar</string>
+    <string name="service">Service</string>
+    <string name="price">Price</string>
+    <string name="location">Location</string>
+    <string name="cleanliness">Cleanliness</string>
 </resources>

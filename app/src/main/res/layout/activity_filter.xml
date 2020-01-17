@@ -7,16 +7,54 @@
         android:layout_height="match_parent"
         tools:context=".FilterActivity">
 
-    <androidx.recyclerview.widget.RecyclerView android:id="@+id/lstFilter" android:layout_width="match_parent"
-                                               android:layout_height="match_parent"
-                                               app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"
-                                               app:layout_constraintStart_toStartOf="parent"
-                                               android:layout_marginStart="8dp"
-                                               app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                                               app:layout_constraintBottom_toBottomOf="parent"
-                                               android:layout_marginBottom="8dp">
+    <Button android:layout_width="0dp" android:text="@string/room" android:layout_height="wrap_content"
+            android:id="@+id/btnRoom"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/btnFood" android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <Button android:layout_width="0dp" android:text="@string/food" android:layout_height="wrap_content"
+            android:id="@+id/btnFood"
+            app:layout_constraintStart_toEndOf="@+id/btnRoom" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp" android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"/>
 
 
+    <Button android:layout_width="0dp" app:layout_constraintTop_toBottomOf="@id/btnRoom"
+            android:layout_height="wrap_content" android:id="@+id/btnService"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/btnPrice" android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" android:layout_marginEnd="8dp" android:text="@string/service"/>
+
+    <Button android:layout_width="0dp" android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/btnFood" android:id="@+id/btnPrice"
+            app:layout_constraintStart_toEndOf="@+id/btnService" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp" android:layout_marginEnd="16dp" android:text="@string/price"/>
+
+
+    <Button android:layout_width="0dp" app:layout_constraintTop_toBottomOf="@id/btnService"
+            android:layout_height="wrap_content" android:id="@+id/btnCleanliness"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/btnLocation" android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp" android:layout_marginEnd="8dp" android:text="@string/cleanliness"/>
+
+    <Button android:layout_width="0dp" app:layout_constraintTop_toBottomOf="@id/btnPrice"
+            android:layout_height="wrap_content" android:id="@+id/btnLocation"
+            app:layout_constraintStart_toEndOf="@+id/btnCleanliness" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp" android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp" android:text="@string/location"/>
+
+    <Button android:layout_width="0dp" app:layout_constraintTop_toBottomOf="@id/btnCleanliness"
+            android:id="@+id/btnStaff" android:text="@string/staff" android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/btnBar" android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp" android:layout_marginEnd="8dp"/>
+
+    <Button android:layout_width="0dp" android:id="@+id/btnBar"
+            app:layout_constraintTop_toBottomOf="@id/btnLocation" android:text="@string/bar"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/btnStaff" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp" android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
