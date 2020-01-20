@@ -10,7 +10,7 @@ class RegisterAsync : AsyncTask<JSONObject?, Void, Int?>() {
     override fun doInBackground(vararg params: JSONObject?): Int? {
         response = httpConnectionUtil.requestPost(HttpConstants.URL.plus(HttpConstants.REGISTER), params[0])
         response.let {
-            it?.toInt() ?: return null
+           return it?.toInt() ?:  null
         }
         return null
     }

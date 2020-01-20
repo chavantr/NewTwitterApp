@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import com.mywings.newtwitterapp.process.OnRegistrationListener
 import com.mywings.newtwitterapp.process.ProgressDialogUtil
+import com.mywings.newtwitterapp.process.RegisterAsync
 import kotlinx.android.synthetic.main.activity_registration.*
+import org.json.JSONObject
 
 class RegistrationActivity : AppCompatActivity(), OnRegistrationListener {
 
@@ -28,6 +30,7 @@ class RegistrationActivity : AppCompatActivity(), OnRegistrationListener {
     }
 
     override fun onRegistrationSuccess(success: Int?) {
+        progressDialogUtil.hide()
         if (success != null) {
             if (success > 0) {
                 finish()
@@ -46,7 +49,15 @@ class RegistrationActivity : AppCompatActivity(), OnRegistrationListener {
 
     private fun initRegister() {
         progressDialogUtil.show()
-        //val registerAsync = Registe
+        val registerAsync = RegisterAsync()
+        val jRequest = JSONObject()
+        val jParam = JSONObject()
+        jParam.put("Name", txtName.text)
+        jParam.put("Mobile", txtPhone.text)
+        jParam.put("Email", txtEmail.text)
+        jParam.put("Password", txtPassword.text)
+        jRequest.put("request", jParam)
+        registerAsync.setOnRegisterListener(this, jRequest)
     }
 
     private fun validate(): Boolean =
@@ -55,5 +66,5 @@ class RegistrationActivity : AppCompatActivity(), OnRegistrationListener {
                 && !txtPhone.text.isNullOrEmpty()
                 && !txtPassword.text.isNullOrEmpty()
 
-    private fun validateConfirm(): Boolean = txtPassword.text == txtConfirmPassword.text
+    private fun validateConfirm(): Boolean = txtPassword.text.toString().equals(txtConfirmPassword.text.toString())
 }

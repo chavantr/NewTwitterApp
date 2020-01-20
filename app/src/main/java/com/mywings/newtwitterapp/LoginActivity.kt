@@ -30,7 +30,8 @@ class LoginActivity : AppCompatActivity(), OnLoginListener {
         }
 
         btnSignUp.setOnClickListener {
-
+            val intent = Intent(this@LoginActivity, RegistrationActivity::class.java)
+            startActivity(intent)
         }
     }
 

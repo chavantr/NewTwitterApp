@@ -55,6 +55,11 @@ class FilterActivity : AppCompatActivity(), OnFilterDataListener {
         btnBar.setOnClickListener {
             startResultActivity(services[7])
         }
+
+        btnViewGraph.setOnClickListener {
+            val intent = Intent(this@FilterActivity, ViewGraphActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun init() {

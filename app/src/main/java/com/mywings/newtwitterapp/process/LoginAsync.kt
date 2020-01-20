@@ -13,19 +13,20 @@ class LoginAsync : AsyncTask<JSONObject?, Void, User?>() {
     private val httpConnectionUtil = HttpConnectionUtil()
 
     override fun doInBackground(vararg params: JSONObject?): User? {
-        response = httpConnectionUtil.requestPost(HttpConstants.URL.plus(HttpConstants.LOGIN),params[0])
+        response = httpConnectionUtil.requestPost(HttpConstants.URL.plus(HttpConstants.LOGIN), params[0])
 
         response.let {
-
-            val jUser = JSONObject(it)
-            if (null != jUser) {
-                val user = User()
-                user.id = jUser.getInt("Id")
-                user.name = jUser.getString("Name")
-                user.phone = jUser.getString("Mobile")
-                user.email = jUser.getString("Email")
-                user.password = jUser.getString("Password")
-                return user
+            if (null != it && !it?.isNullOrEmpty()) {
+                val jUser = JSONObject(it)
+                if (null != jUser) {
+                    val user = User()
+                    user.id = jUser.getInt("Id")
+                    user.name = jUser.getString("Name")
+                    user.phone = jUser.getString("Mobile")
+                    user.email = jUser.getString("Email")
+                    user.password = jUser.getString("Password")
+                    return user
+                }
             }
         }
 

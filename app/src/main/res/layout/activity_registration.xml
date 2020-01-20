@@ -64,6 +64,7 @@
                 android:id="@+id/txtPhone"
                 android:layout_width="match_parent"
                 android:inputType="phone"
+                android:maxLength="10"
                 android:hint="@string/enter_phone_number"
                 android:layout_height="wrap_content"/>
 
