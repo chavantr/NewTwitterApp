@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.mywings.newtwitterapp.algorithm.RemoveStopWords
 import com.mywings.newtwitterapp.algorithm.Stemmer
+import com.mywings.newtwitterapp.model.GraphDetails
 import com.mywings.newtwitterapp.model.TwitterComments
 import com.mywings.newtwitterapp.process.FetchFilterValue
 import com.mywings.newtwitterapp.process.OnFilterDataListener
@@ -57,6 +58,7 @@ class FilterActivity : AppCompatActivity(), OnFilterDataListener {
         }
 
         btnViewGraph.setOnClickListener {
+            calculateGraphDetails()
             val intent = Intent(this@FilterActivity, ViewGraphActivity::class.java)
             startActivity(intent)
         }
@@ -95,6 +97,26 @@ class FilterActivity : AppCompatActivity(), OnFilterDataListener {
         return count
     }
 
+    private fun calculateGraphDetails() {
+        graphDetails = ArrayList()
+        graphDetails.add(GraphDetails())
+        graphDetails.add(GraphDetails())
+        graphDetails.add(GraphDetails())
+        graphDetails.add(GraphDetails())
+        graphDetails.add(GraphDetails())
+        graphDetails.add(GraphDetails())
+        graphDetails.add(GraphDetails())
+        graphDetails.add(GraphDetails())
+        for (i in services.indices) {
+            graphDetails[i].type = services[i]
+            for (j in mResult?.indices!!) {
+                if (mResult!![j]?.comment?.contains(services[i])!!) {
+                    graphDetails[i].id = graphDetails[i].id + 1
+                }
+            }
+        }
+    }
+
     private fun startResultActivity(keyword: String?) {
         resultToDisplay = searchServices(keyword)
         val intent = Intent(this@FilterActivity, ResultServiceActivity::class.java)
@@ -104,5 +126,6 @@ class FilterActivity : AppCompatActivity(), OnFilterDataListener {
 
     companion object {
         lateinit var resultToDisplay: ArrayList<String>
+        lateinit var graphDetails: ArrayList<GraphDetails>
     }
 }
