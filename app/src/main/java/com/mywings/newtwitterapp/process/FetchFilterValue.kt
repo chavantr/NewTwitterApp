@@ -29,6 +29,7 @@ class FetchFilterValue : AsyncTask<String?, Void, ArrayList<TwitterComments>?>()
                     twitterComments.comment = jNode.getString(HttpConstants.COMMENT_DATA)
                     twitterComments.stopWord = jNode.getString(HttpConstants.STOP_WORD_DATA)
                     twitterComments.stemmer = jNode.getString(HttpConstants.STIMMER_DATA)
+                    twitterComments.classLabel = jNode.getString(HttpConstants.CLASS_LABEL)
                     filter?.add(twitterComments)
                 }
             }

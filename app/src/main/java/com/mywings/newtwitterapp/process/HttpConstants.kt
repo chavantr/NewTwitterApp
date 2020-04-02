@@ -12,5 +12,6 @@ object HttpConstants {
     const val COMMENT_DATA = "CommentData"
     const val STOP_WORD_DATA = "StopWordData"
     const val STIMMER_DATA = "StimmerData"
+    const val CLASS_LABEL = "ClassLabel"
 
 }

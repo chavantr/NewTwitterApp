@@ -1,11 +1,10 @@
 package com.mywings.newtwitterapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.mywings.newtwitterapp.algorithm.RemoveStopWords
-import com.mywings.newtwitterapp.algorithm.Stemmer
-import com.mywings.newtwitterapp.model.GraphDetails
+import android.util.Log
+import android.widget.PopupMenu
+import androidx.appcompat.app.AppCompatActivity
 import com.mywings.newtwitterapp.model.TwitterComments
 import com.mywings.newtwitterapp.process.FetchFilterValue
 import com.mywings.newtwitterapp.process.OnFilterDataListener
@@ -17,50 +16,91 @@ class FilterActivity : AppCompatActivity(), OnFilterDataListener {
     private lateinit var progressDialogUtil: ProgressDialogUtil
 
     private var mResult: ArrayList<TwitterComments>? = null
+    private lateinit var mResultNext: ArrayList<TwitterComments>
+    private var searchCategory: String? = null
 
     private var services = arrayListOf(
-        "Food",
-        "Room", "Location", "Staff",
-        "Service", "Price",
-        "Cleanliness", "Bar"
+        "Room",
+        "Price", "Staff", "Service",
+        "Food", "Hotel",
+        "Historical places", "Beach", "Water park"
     )
-
-    private var sortedData: ArrayList<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter)
         progressDialogUtil = ProgressDialogUtil(this)
         init()
-        btnRoom.setOnClickListener {
-            startResultActivity(services[1])
-        }
-        btnFood.setOnClickListener {
-            startResultActivity(services[0])
-        }
-        btnService.setOnClickListener {
-            startResultActivity(services[4])
-        }
-        btnPrice.setOnClickListener {
-            startResultActivity(services[5])
-        }
-        btnCleanliness.setOnClickListener {
-            startResultActivity(services[6])
-        }
-        btnLocation.setOnClickListener {
-            startResultActivity(services[2])
-        }
-        btnStaff.setOnClickListener {
-            startResultActivity(services[3])
-        }
-        btnBar.setOnClickListener {
-            startResultActivity(services[7])
+
+        btnHotel.setOnClickListener {
+            searchCategory = services[5]
+            startResultActivity(searchCategory)
         }
 
-        btnViewGraph.setOnClickListener {
-            calculateGraphDetails()
-            val intent = Intent(this@FilterActivity, ViewGraphActivity::class.java)
-            startActivity(intent)
+        btnHistoricalPlaces.setOnClickListener {
+            searchCategory = services[6]
+            startResultActivity(searchCategory)
+        }
+
+        btnBeach.setOnClickListener {
+            searchCategory = services[7]
+            startResultActivity(searchCategory)
+        }
+
+        btnWaterParks.setOnClickListener {
+            searchCategory = services[8]
+            startResultActivity(searchCategory)
+        }
+
+        btnRoom.setOnClickListener {
+            searchCategory = services[0]
+            startResultActivity(searchCategory)
+        }
+
+        btnPrice.setOnClickListener {
+            searchCategory = services[1]
+            startResultActivity(searchCategory)
+        }
+
+        btnStaff.setOnClickListener {
+            searchCategory = services[2]
+            startResultActivity(searchCategory)
+        }
+
+        btnServices.setOnClickListener {
+            searchCategory = services[3]
+            startResultActivity(searchCategory)
+        }
+
+        btnFood.setOnClickListener {
+            searchCategory = services[4]
+            startResultActivity(searchCategory)
+        }
+
+        btnAllAspects.setOnClickListener {
+
+            newType = mResult!!
+
+            val popupMenu = PopupMenu(this@FilterActivity, it)
+            popupMenu.menuInflater.inflate(R.menu.menu_positive_negative, popupMenu.menu)
+
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.menu_positive -> {
+                        val intent = Intent(this@FilterActivity, ViewGraphActivity::class.java)
+                        intent.putExtra("flag", true)
+                        startActivity(intent)
+                        return@setOnMenuItemClickListener true
+                    }
+                    else -> {
+                        val intent = Intent(this@FilterActivity, ViewGraphActivity::class.java)
+                        intent.putExtra("flag", false)
+                        startActivity(intent)
+                        return@setOnMenuItemClickListener true
+                    }
+                }
+            }
+            popupMenu.show()
         }
     }
 
@@ -74,58 +114,36 @@ class FilterActivity : AppCompatActivity(), OnFilterDataListener {
         progressDialogUtil.hide()
 
         if (null != result && !result?.isNullOrEmpty()) {
-            val removeStopWords = RemoveStopWords()
-            val stemmer = Stemmer()
-            sortedData = ArrayList()
             mResult = ArrayList()
             result.forEach {
-                if (null != it && it.comment?.contains(intent.getStringExtra("keyword"))!!) {
+                if (null != it && it.comment?.contains(intent.getStringExtra("keyword"), true)!!) {
                     mResult?.add(it)
-                    sortedData?.add(stemmer.getData(removeStopWords.removeWords(it.comment, this@FilterActivity)));
                 }
             }
         }
     }
 
-    private fun searchServices(keyword: String?): ArrayList<String> {
-        var count: ArrayList<String> = ArrayList()
-        mResult?.forEach {
-            if (null != it && it?.comment?.contains(keyword!!)!!) {
-                count?.add(it?.comment!!)
+    private fun searchServices(keyword: String?): ArrayList<TwitterComments> {
+        mResultNext = ArrayList()
+
+        for (node in mResult!!) {
+            if (node.classLabel?.toLowerCase() == keyword?.toLowerCase()) {
+                mResultNext.add(node)
             }
         }
-        return count
+
+        return mResultNext
     }
 
-    private fun calculateGraphDetails() {
-        graphDetails = ArrayList()
-        graphDetails.add(GraphDetails())
-        graphDetails.add(GraphDetails())
-        graphDetails.add(GraphDetails())
-        graphDetails.add(GraphDetails())
-        graphDetails.add(GraphDetails())
-        graphDetails.add(GraphDetails())
-        graphDetails.add(GraphDetails())
-        graphDetails.add(GraphDetails())
-        for (i in services.indices) {
-            graphDetails[i].type = services[i]
-            for (j in mResult?.indices!!) {
-                if (mResult!![j]?.comment?.contains(services[i])!!) {
-                    graphDetails[i].id = graphDetails[i].id + 1
-                }
-            }
-        }
-    }
 
     private fun startResultActivity(keyword: String?) {
-        resultToDisplay = searchServices(keyword)
+        newType = searchServices(keyword)
         val intent = Intent(this@FilterActivity, ResultServiceActivity::class.java)
         intent.putExtra("next", keyword)
         startActivity(intent)
     }
 
     companion object {
-        lateinit var resultToDisplay: ArrayList<String>
-        lateinit var graphDetails: ArrayList<GraphDetails>
+        lateinit var newType: ArrayList<TwitterComments>
     }
 }

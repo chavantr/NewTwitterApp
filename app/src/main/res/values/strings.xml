@@ -3,14 +3,18 @@
     <string name="search_keyword">Search keyword</string>
     <string name="search_here">Search here</string>
     <string name="search">Search</string>
+    <!-- services -->
     <string name="room">Room</string>
-    <string name="food">Food</string>
-    <string name="staff">Staff</string>
-    <string name="bar">Bar</string>
-    <string name="service">Service</string>
     <string name="price">Price</string>
-    <string name="location">Location</string>
-    <string name="cleanliness">Cleanliness</string>
+    <string name="staff">Staff</string>
+    <string name="service">Service</string>
+    <string name="food">Food</string>
+    <string name="hotel">Hotel</string>
+    <string name="historical_places">Historical places</string>
+    <string name="beach">Beach</string>
+    <string name="water_park">Water park</string>
+
+    <!-- services -->
     <string name="positive">Positive</string>
     <string name="negative">Negative</string>
     <string name="title_activity_login">Sign in</string>
@@ -31,4 +35,5 @@
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign Up</string>
     <string name="view_details">View details</string>
+    <string name="all_aspects">All aspects</string>
 </resources>
