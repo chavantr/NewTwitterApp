@@ -11,20 +11,14 @@ class FetchFilterValue : AsyncTask<String?, Void, ArrayList<TwitterComments>?>()
 
     override fun doInBackground(vararg params: String?): ArrayList<TwitterComments>? {
         response = HttpConnectionUtil().requestGet(HttpConstants.URL.plus(HttpConstants.LOAD_DATA))
-
         var filter: ArrayList<TwitterComments>? = null
-
         response.let {
-
             if (it.isNullOrEmpty()) filter = null else {
                 filter = ArrayList()
                 val jFilters = JSONArray(it)
                 for (i in 0 until jFilters.length()) {
-
                     val jNode = jFilters.getJSONObject(i)
-
                     val twitterComments = TwitterComments()
-
                     twitterComments.id = jNode.getInt(HttpConstants.ID)
                     twitterComments.comment = jNode.getString(HttpConstants.COMMENT_DATA)
                     twitterComments.stopWord = jNode.getString(HttpConstants.STOP_WORD_DATA)
@@ -46,5 +40,4 @@ class FetchFilterValue : AsyncTask<String?, Void, ArrayList<TwitterComments>?>()
         this.onFilterDataListener = onFilterDataListener
         this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, param)
     }
-
 }

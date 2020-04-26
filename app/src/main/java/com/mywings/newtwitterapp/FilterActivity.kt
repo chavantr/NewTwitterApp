@@ -2,7 +2,6 @@ package com.mywings.newtwitterapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import com.mywings.newtwitterapp.model.TwitterComments
@@ -20,10 +19,7 @@ class FilterActivity : AppCompatActivity(), OnFilterDataListener {
     private var searchCategory: String? = null
 
     private var services = arrayListOf(
-        "Room",
-        "Price", "Staff", "Service",
-        "Food", "Hotel",
-        "Historical places", "Beach", "Water park"
+        "Room", "Price", "Staff", "Service", "Food", "Hotel", "Historical places", "Beach", "Water park"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,7 +112,7 @@ class FilterActivity : AppCompatActivity(), OnFilterDataListener {
         if (null != result && !result?.isNullOrEmpty()) {
             mResult = ArrayList()
             result.forEach {
-                if (null != it && it.comment?.contains(intent.getStringExtra("keyword"), true)!!) {
+                if (it.comment?.contains(intent.getStringExtra("keyword"), true)!!) {
                     mResult?.add(it)
                 }
             }
@@ -125,13 +121,11 @@ class FilterActivity : AppCompatActivity(), OnFilterDataListener {
 
     private fun searchServices(keyword: String?): ArrayList<TwitterComments> {
         mResultNext = ArrayList()
-
         for (node in mResult!!) {
             if (node.classLabel?.toLowerCase() == keyword?.toLowerCase()) {
                 mResultNext.add(node)
             }
         }
-
         return mResultNext
     }
 

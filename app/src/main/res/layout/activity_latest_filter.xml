@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/login_bg"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_height="match_parent"
+        tools:context=".LatestFilter">
+
+    <Button android:layout_width="match_parent"
+            android:id="@+id/btnHotel"
+            android:layout_height="wrap_content"
+            android:text="@string/hotel"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+
+    <Button android:layout_width="match_parent"
+            android:id="@+id/btnHistoricalPlaces"
+            android:layout_height="wrap_content"
+            android:text="@string/historical_places"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+
+    <Button android:layout_width="match_parent"
+            android:id="@+id/btnBeach"
+            android:text="@string/beach"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+
+    <Button android:layout_width="match_parent"
+            android:id="@+id/btnWaterParks"
+            android:text="@string/water_park"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+
+    <Button android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAllAspects"
+            android:text="@string/all_aspects"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+
+
+</LinearLayout>

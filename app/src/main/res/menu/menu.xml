@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_hotel" android:title="Hotel"/>
+    <item android:id="@+id/menu_places" android:title="Historical Places"/>
+    <item android:id="@+id/menu_beach" android:title="Beach"/>
+    <item android:id="@+id/menu_water_parks" android:title="Water Parks"/>
+
+
+</menu>

@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         btnSearch.setOnClickListener {
             if (!txtSearch.text.toString().isNullOrEmpty()) {
-                val intent = Intent(this@MainActivity, FilterActivity::class.java)
+                val intent = Intent(this@MainActivity, LatestFilter::class.java)
                 intent.putExtra("keyword", txtSearch.text.toString())
                 startActivity(intent)
             } else {

@@ -18,19 +18,16 @@ class ResultServiceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_sevice)
         chart.setUsePercentValues(true)
-
         chart.setExtraOffsets(5f, 10f, 5f, 10f)
         chart.description.isEnabled = true
         val removeStopWords = RemoveStopWords()
-
-        for (node in FilterActivity.newType) {
-            negativeCount = negativeCount.plus(removeStopWords.negativeTopics(node.comment, this))
-            positiveCount = positiveCount.plus(removeStopWords.positiveTopics(node.comment, this))
+        for (node in LatestFilter.final) {
+            if (node.aspectName == intent.extras?.getString("upper") && node.aspectList == intent.extras?.getString("lower")) {
+                negativeCount = node.aspectNegative
+                positiveCount = node.aspectPositive
+                break
+            }
         }
-
-       // val newValue = negativeCount * 100 / FilterActivity.newType.size
-
-       // positiveCount = 100 - newValue
 
         val entries = ArrayList<PieEntry>()
 
